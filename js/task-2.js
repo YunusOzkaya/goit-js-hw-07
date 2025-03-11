@@ -25,8 +25,18 @@ const images = [
   }
 ];
 
-const galleryEl = document.querySelector(".gallery")
+const galleryEl = document.querySelector(".gallery");
+const fragment = document.createDocumentFragment();
 
-galleryEl.innerHTML = images.map(image => {
- return `<li><img src=${image.url} alt=${image.alt}/></li>`;
-}).join("")
+images.forEach(({ url, alt }) => {
+  const li = document.createElement("li");
+  const img = document.createElement("img");
+
+  img.src = url;
+  img.alt = alt;
+  
+  li.appendChild(img);
+  fragment.appendChild(li);
+});
+
+galleryEl.appendChild(fragment);
